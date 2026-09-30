@@ -49,3 +49,5 @@ The starter catalogue is code-backed in `lib/products.ts`. Replace the dummy SVG
 ## Important next production steps
 
 Before launch, connect a real domain, replace demo product data, add shipping/pincode rules, configure transactional email/SMS, add an admin order view, add a real return/refund workflow, and switch the database to managed PostgreSQL. COD should remain an explicitly selectable payment method only if that matches the brand's actual fulfilment policy.
+
+Vercel deployment test
