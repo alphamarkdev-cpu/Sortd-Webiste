@@ -1,0 +1,9 @@
+'use client';
+
+import Link from 'next/link';
+import { useCart } from '@/components/cart-context';
+
+export default function CartPage() {
+  const { items, subtotal, updateQty, removeItem } = useCart();
+  return <section className="page-shell cart-page"><div className="page-intro compact"><p className="eyebrow">YOUR CART</p><h1>Ready when you are.</h1></div>{items.length === 0 ? <div className="empty-state large"><div className="empty-icon">□</div><h2>Your cart is empty.</h2><p>Start with one problem area. Add an organiser that gives it a better layout.</p><Link href="/shop" className="primary-btn">Browse organisers →</Link></div> : <div className="cart-layout"><div className="cart-lines">{items.map((item)=><div className="cart-line" key={item.id}><img src={item.image} alt=""/><div className="cart-line-copy"><Link href={`/shop/${item.slug}`}><h3>{item.name}</h3></Link><p>₹{item.price.toLocaleString('en-IN')} each</p><div className="cart-controls"><div className="qty-control"><button onClick={()=>updateQty(item.id,item.quantity-1)}>−</button><span>{item.quantity}</span><button onClick={()=>updateQty(item.id,item.quantity+1)}>+</button></div><button className="remove-btn" onClick={()=>removeItem(item.id)}>Remove</button></div></div><strong>₹{(item.price*item.quantity).toLocaleString('en-IN')}</strong></div>)}</div><aside className="summary-card"><p className="eyebrow">ORDER SUMMARY</p><div className="summary-row"><span>Subtotal</span><b>₹{subtotal.toLocaleString('en-IN')}</b></div><div className="summary-row"><span>Shipping</span><b>Free</b></div><div className="summary-total"><span>Total</span><strong>₹{subtotal.toLocaleString('en-IN')}</strong></div><div className="summary-note">Cash on Delivery is enabled for this build.</div><Link href="/checkout" className="primary-btn wide">Continue to checkout →</Link></aside></div>}</section>;
+}
